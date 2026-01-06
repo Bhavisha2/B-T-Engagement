@@ -7,6 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Import EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
     <style>
         body {
@@ -100,7 +102,7 @@
                         <i class="fas fa-check"></i>
                     </div>
                     <h3 class="text-2xl font-serif text-gray-800 mb-2">Thank you!</h3>
-                    <p class="text-gray-600">Your RSVP has been sent successfully. We can't wait to see you!</p>
+                    <p class="text-gray-600">Your RSVP has been sent successfully. Please check your email for confirmation.</p>
                     <button onclick="resetForm()" class="mt-6 text-sm text-indigo-500 hover:text-indigo-700 underline">
                         Send another response
                     </button>
@@ -178,7 +180,7 @@
 
     </main>
 
-    <!-- Firebase Configuration -->
+    <!-- Firebase & EmailJS Configuration -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -212,7 +214,15 @@
         };
         initAuth(); 
 
-        // 3. Handle Form Submission
+        // 3. EmailJS Initialization
+        // !!! IMPORTANT: Replace "YOUR_PUBLIC_KEY_HERE" with your Public Key from EmailJS
+        try {
+            emailjs.init("VtL2Mymm1_s8iyzDU"); 
+        } catch(e) {
+            console.log("EmailJS not configured yet");
+        }
+
+        // 4. Handle Form Submission
         const form = document.getElementById('rsvp-form');
         const submitBtn = document.getElementById('submit-btn');
         const successMsg = document.getElementById('success-message');
@@ -260,6 +270,24 @@
                     guests: guests,
                     submittedAt: serverTimestamp()
                 });
+
+                // 2. Send Confirmation Email (EmailJS)
+                if (email) {
+                    try {
+                        // !!! IMPORTANT: Replace "YOUR_SERVICE_ID_HERE" and "YOUR_TEMPLATE_ID_HERE"
+                        await emailjs.send("service_qjgdvn9", "template_k8fmhsn", {
+                            name: name,
+                            email: email,
+                            phone: phone,
+                            attending: attending ? "Joyfully Accept" : "Regretfully Decline",
+                            guests: guests
+                        });
+                        console.log("Email sent successfully");
+                    } catch (emailError) {
+                        console.error("Failed to send email:", emailError);
+                        // We proceed to show success message even if email fails
+                    }
+                }
 
                 // Show Success
                 successMsg.classList.remove('hidden');
