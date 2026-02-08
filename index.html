@@ -8,7 +8,6 @@
     <!-- WHATSAPP & SOCIAL SHARE PREVIEW TAGS -->
     <meta property="og:title" content="Bhavisha and Tejas's Engagement Invite!">
     <meta property="og:description" content="Please join us for a celebration. Click to watch our video invitation and RSVP :).">
-    <!-- PASTE YOUR DIRECT IMGUR LINK BELOW inside the quotes -->
     <meta property="og:image" content="https://i.imgur.com/hetJcjS.jpeg">
     <meta property="og:type" content="website">
 
@@ -39,27 +38,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        /* Canva Embed Responsive Fixes */
-        .canva-embed-container {
-            position: relative;
-            width: 100%;
-            height: 0;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
-            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            overflow: hidden;
-            background: #eee;
-        }
-        .canva-embed-container iframe, 
-        .canva-embed-container > div {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100% !important;
-            height: 100% !important;
-            border: none;
-            margin: 0 !important;
-        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -79,17 +57,35 @@
         
         <!-- VIDEO SECTION -->
         <section class="mb-16">
-            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-                <!-- START: Canva Embed Code -->
-                <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%;
- padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
- border-radius: 8px; will-change: transform;">
-  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
-    src="https://www.canva.com/design/DAG9ovlH6jc/78NDcY_3HpktqiNUuo8xCQ/watch?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
-  </iframe>
-</div>
+            <!-- 
+                UPDATED CONTAINER:
+                1. md:w-3/4 md:mx-auto: Restricts width to 75% on computers and centers it, so it's not too huge.
+                2. border-4 border-white shadow-2xl: Keeps the nice frame and depth.
+            -->
+            <div class="w-full md:w-3/4 md:mx-auto shadow-2xl rounded-2xl overflow-hidden bg-black border-4 border-white">
+                
+                <!-- 
+                   RESPONSIVE ASPECT RATIO:
+                   Mobile (Default): pt-[177.77%] -> Tall vertical (Phone shape)
+                   Desktop (md): pt-[56.25%] -> Wide horizontal (Cinema shape)
+                -->
+                <div class="relative w-full h-0 pt-[177.77%] md:pt-[56.25%]">
+                  <iframe loading="lazy" class="absolute top-0 left-0 w-full h-full border-0"
+                    src="https://www.canva.com/design/DAG9ovlH6jc/78NDcY_3HpktqiNUuo8xCQ/watch?embed" 
+                    allow="fullscreen; autoplay; encrypted-media; picture-in-picture; accelerometer; gyroscope"
+                    title="Engagement Invitation B&T">
+                  </iframe>
                 </div>
-                <!-- END: Canva Embed Code -->
+            </div>
+
+            <!-- IMMERSIVE BUTTON (Added below video) -->
+            <div class="text-center mt-6">
+                <p class="text-sm text-gray-400 mb-2 italic">Video not playing correctly?</p>
+                <a href="https://www.canva.com/design/DAG9ovlH6jc/78NDcY_3HpktqiNUuo8xCQ/watch" 
+                   target="_blank"
+                   class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-50 text-indigo-600 rounded-full font-semibold text-sm hover:bg-indigo-100 transition duration-200">
+                    <i class="fas fa-expand"></i> Watch in Full Screen
+                </a>
             </div>
         </section>
 
@@ -222,8 +218,8 @@
         initAuth(); 
 
         // 3. EmailJS Initialization
-        // !!! IMPORTANT: Replace "YOUR_PUBLIC_KEY_HERE" with your Public Key from EmailJS
         try {
+            // Using the key provided in your previous message
             emailjs.init("oJ76ZNcB02gEX9dy_"); 
         } catch(e) {
             console.log("EmailJS not configured yet");
@@ -281,8 +277,7 @@
                 // 2. Send Confirmation Email (EmailJS)
                 if (email) {
                     try {
-                        // Check if keys are still default placeholder
-                        // !!! IMPORTANT: Replace "YOUR_SERVICE_ID_HERE" and "YOUR_TEMPLATE_ID_HERE"
+                        // Using Service/Template IDs from your previous message
                         await emailjs.send("service_pg9bb4n", "template_k8fmhsn", {
                             name: name,
                             email: email,
@@ -292,7 +287,6 @@
                         });
                         console.log("Email sent successfully");
                     } catch (emailError) {
-                        // DEBUG MODE: This will now ALERT you if the email fails
                         console.error("Failed to send email:", emailError);
                         alert("RSVP Saved, but Email Failed: " + JSON.stringify(emailError));
                     }
@@ -324,14 +318,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
