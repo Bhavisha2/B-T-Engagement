@@ -59,7 +59,7 @@
         <section class="mb-16">
             <!-- 
                 UPDATED CONTAINER:
-                1. md:w-3/4 md:mx-auto: Restricts width to 75% on computers and centers it, so it's not too huge.
+                1. md:w-3/4 md:mx-auto: Restricts width to 75% on computers and centers it.
                 2. border-4 border-white shadow-2xl: Keeps the nice frame and depth.
             -->
             <div class="w-full md:w-3/4 md:mx-auto shadow-2xl rounded-2xl overflow-hidden bg-black border-4 border-white">
@@ -69,19 +69,24 @@
                    Mobile (Default): pt-[177.77%] -> Tall vertical (Phone shape)
                    Desktop (md): pt-[56.25%] -> Wide horizontal (Cinema shape)
                 -->
-                <div class="relative w-full h-0 pt-[177.77%] md:pt-[56.25%]">
+                <div class="relative w-full h-0 pt-[150%] md:pt-[56.25%]">
+                  <!-- 
+                      IFRAME UPDATES:
+                      1. Changed Link: Using 'DAG-HXJIswg' (the one from your code snippet).
+                      2. REMOVED 'autoplay': This prevents the "clash" of ghost audio.
+                  -->
                   <iframe loading="lazy" class="absolute top-0 left-0 w-full h-full border-0"
-                    src="https://www.canva.com/design/DAG9ovlH6jc/78NDcY_3HpktqiNUuo8xCQ/watch?embed" 
-                    allow="fullscreen; autoplay; encrypted-media; picture-in-picture; accelerometer; gyroscope"
-                    title="Engagement Invitation B&T">
+                    src="https://www.canva.com/design/DAG-HXJIswg/UaH4MAoooU9hF58899r1RA/watch?embed" 
+                    allow="fullscreen; encrypted-media; picture-in-picture;"
+                    title="Engagement Invitation Video">
                   </iframe>
                 </div>
             </div>
 
-            <!-- IMMERSIVE BUTTON (Added below video) -->
+            <!-- IMMERSIVE BUTTON -->
             <div class="text-center mt-6">
                 <p class="text-sm text-gray-400 mb-2 italic">Video not playing correctly?</p>
-                <a href="https://www.canva.com/design/DAG9ovlH6jc/78NDcY_3HpktqiNUuo8xCQ/watch" 
+                <a href="https://www.canva.com/design/DAG-HXJIswg/UaH4MAoooU9hF58899r1RA/watch" 
                    target="_blank"
                    class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-50 text-indigo-600 rounded-full font-semibold text-sm hover:bg-indigo-100 transition duration-200">
                     <i class="fas fa-expand"></i> Watch in Full Screen
